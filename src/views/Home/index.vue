@@ -1,7 +1,13 @@
 <template>
   <v-app>
-    <v-navigation-drawer app :permanent="$vuetify.breakpoint.mdAndUp" dark
-      :mini-variant="mini && $vuetify.breakpoint.mdAndUp" mini-variant-width="64" class="app-nav-drawer white--text">
+    <v-navigation-drawer
+      app
+      :permanent="$vuetify.breakpoint.mdAndUp"
+      dark
+      :mini-variant="mini && $vuetify.breakpoint.mdAndUp"
+      mini-variant-width="64"
+      class="app-nav-drawer white--text"
+    >
       <v-list-item v-if="mini" class="py-2">
         <v-app-bar-nav-icon @click.stop="mini = !mini">
           <font-awesome-icon size="16" icon="fas fa-bars" />
@@ -9,22 +15,23 @@
       </v-list-item>
       <v-list-item v-if="!mini" class="py-2">
         <v-list-item-content class="py-0">
-          <v-list-group :value="true">
+          <v-list-group :value="false" class="py-0">
             <template v-slot:activator>
-              <font-awesome-icon icon="fas fa-user-circle" class="mr-8"/>
+              <font-awesome-icon icon="fas fa-user-circle" class="mr-8" />
               <v-list-item-title>User</v-list-item-title>
             </template>
 
-            <v-list-group :value="true" no-action sub-group>
+            <v-list-group :value="false" no-action sub-group>
               <template v-slot:activator>
-                <v-list-item-content>
-                  <v-list-item-title>Profil</v-list-item-title>
+                <v-list-item-content class="d-flex flex-row">
+                  <v-list-item-title>
+                    <font-awesome-icon icon="fas fa-cog" class="mr-4" />
+                    Pengaturan
+                  </v-list-item-title>
                 </v-list-item-content>
               </template>
-
               <v-list-item v-for="([title, icon], i) in admins" :key="i" link>
                 <v-list-item-title v-text="title"></v-list-item-title>
-
                 <v-list-item-icon>
                   <v-icon v-text="icon"></v-icon>
                 </v-list-item-icon>
@@ -34,7 +41,10 @@
             <v-list-group no-action sub-group>
               <template v-slot:activator>
                 <v-list-item-content>
-                  <v-list-item-title>Manajemen User</v-list-item-title>
+                  <v-list-item-title>
+                    <font-awesome-icon icon="fas fa-users" class="mr-4" />
+                    Kelola User
+                  </v-list-item-title>
                 </v-list-item-content>
               </template>
               <v-list-item v-for="([title, icon], i) in cruds" :key="i" link>
@@ -48,7 +58,10 @@
             <v-list-group no-action sub-group>
               <template v-slot:activator>
                 <v-list-item-content>
-                  <v-list-item-title>LogOut</v-list-item-title>
+                  <v-list-item-title>
+                    <font-awesome-icon icon="fas fa-sign-out" class="mr-4" />
+                    Keluar
+                  </v-list-item-title>
                 </v-list-item-content>
               </template>
               <v-list-item v-for="([title, icon], i) in cruds" :key="i" link>
@@ -58,7 +71,6 @@
                 </v-list-item-icon>
               </v-list-item>
             </v-list-group>
-
           </v-list-group>
         </v-list-item-content>
       </v-list-item>
@@ -66,14 +78,19 @@
       <v-divider></v-divider>
 
       <v-list dense nav class="mt-8">
-        <v-list-item v-for="item in items" :key="item.title" link @click="() => navigate(item)">
+        <v-list-item
+          v-for="item in items"
+          :key="item.title"
+          link
+          @click="() => navigate(item)"
+        >
           <v-list-item-icon class="ml-2 align-center">
             <font-awesome-icon :icon="item.icon" />
           </v-list-item-icon>
 
           <v-list-item-content>
             <v-list-item-title class="list-item">{{
-                item.title
+              item.title
             }}</v-list-item-title>
           </v-list-item-content>
         </v-list-item>
@@ -85,7 +102,10 @@
     </v-navigation-drawer>
 
     <v-app-bar app dark color="dark">
-      <v-app-bar-nav-icon v-if="!mini || $vuetify.breakpoint.smAndDown" @click.stop="toggleDrawer">
+      <v-app-bar-nav-icon
+        v-if="!mini || $vuetify.breakpoint.smAndDown"
+        @click.stop="toggleDrawer"
+      >
         <font-awesome-icon size="16" icon="fas fa-bars" />
       </v-app-bar-nav-icon>
       <v-toolbar-title><b>Perpusku</b></v-toolbar-title>
@@ -128,8 +148,8 @@ export default {
       this.drawer = !this.drawer;
     },
     navigate(item) {
-      this.$router.push(item.link)
-    }
+      this.$router.push(item.link);
+    },
   },
 };
 </script>
